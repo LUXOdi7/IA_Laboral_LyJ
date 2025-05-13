@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultado de Resolución</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Resoluciones recomendadas:</h1>
+        {% if respuestas %}
+            {% for respuesta in respuestas %}
+                <p><strong>Conflicto:</strong> {{ respuesta['caso'] }}</p>
+                <p><strong>Resolución:</strong> {{ respuesta['resolucion'] }}</p>
+                <hr>
+            {% endfor %}
+        {% else %}
+            <p>No se encontraron conflictos coincidentes con la descripción ingresada.</p>
+        {% endif %}
+        <a href="/">Volver</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Resolución de Conflictos Laborales</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Sistema de Resolución de Conflictos Laborales</h1>
+        <form method="POST">
+            <label for="descripcion">Descripción del conflicto:</label>
+            <textarea id="descripcion" name="descripcion" rows="4" required></textarea><br><br>
+            <button type="submit">Obtener Resolución</button>
+        </form>
+    </div>
+</body>
+</html>
