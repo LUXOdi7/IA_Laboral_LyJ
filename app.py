@@ -9,6 +9,26 @@ app = Flask(__name__)
 # Cargar los casos y sus palabras clave desde el CSV
 casos_df = pd.read_csv('casos_laborales.csv')
 
+# Definir un diccionario de sinónimos
+sinonimos = {
+    "horas extras": ["sobretiempo", "horas extra"],
+    "no pagadas": ["impagas", "sin pagar"],
+    "salario": ["sueldo", "remuneración", "paga"],
+    "compensación": ["indemnización", "resarcimiento"],
+    "despido": ["cese", "terminación de contrato"],
+    "sin justificación": ["injustificado", "arbitrario", "ilegal"],
+    "acoso laboral": ["mobbing", "hostigamiento laboral"],
+    "acoso": ["hostigamiento", "persecución"],
+    "violencia": ["agresión", "maltrato"],
+    "hostigamiento": ["persecución", "acoso"],
+    "condiciones de trabajo": ["ambiente laboral", "entorno de trabajo"],
+    "inseguro": ["peligroso", "riesgoso"],
+    "seguridad": ["protección", "prevención"],
+    "vacaciones": ["descanso vacacional", "días de descanso"],
+    "discriminación": ["trato desigual", "marginación"],
+    "robo": ["hurto", "sustracción"]
+}
+
 def preprocesar_texto(texto):
     """
     Preprocesa el texto de entrada para mejorar la coincidencia de palabras clave.
@@ -25,13 +45,13 @@ def preprocesar_texto(texto):
     texto = re.sub(r'[^a-záéíóú\s]', '', texto)
     # Eliminar acentos
     texto = ''.join(c for c in unicodedata.normalize('NFD', texto)
-                    if unicodedata.category(c) != 'Mn')
+                   if unicodedata.category(c) != 'Mn')
     return texto
 
 def buscar_soluciones(texto_usuario):
     """
     Busca en la base de conocimientos (casos_laborales.csv) las soluciones que coinciden
-    con las palabras clave en el texto del usuario.
+    con las palabras clave (y sus sinónimos) en el texto del usuario.
 
     Args:
         texto_usuario (str): El texto ingresado por el usuario.
@@ -55,6 +75,21 @@ def buscar_soluciones(texto_usuario):
                     "ley": row['ley'],
                     "index": index
                 })
+                break
+            # Verificar sinónimos
+            if palabra in sinonimos:
+                for sinonimo in sinonimos[palabra]:
+                    if preprocesar_texto(sinonimo) in texto_usuario:
+                        soluciones_encontradas.append({
+                            "descripcion": row['descripcion'],
+                            "resolucion": row['resolucion'],
+                            "procedimiento": row['procedimiento'],
+                            "ley": row['ley'],
+                            "index": index
+                        })
+                        break
+                else:
+                    continue
                 break
     return soluciones_encontradas
 
@@ -86,9 +121,9 @@ def generar_reporte():
     casos_seleccionados_indices = request.form.getlist('casos_seleccionados')
     casos_seleccionados_indices = [int(i) for i in casos_seleccionados_indices]
 
-    respuestas = buscar_soluciones(request.form['descripcion_original'])
+    respuestas = buscar_soluciones(request.form['descripcion_original']) # Obtener la lista completa de respuestas
 
-    casos_seleccionados = [respuesta for respuesta in respuestas if respuesta['index'] in casos_seleccionados_indices]
+    casos_seleccionados = [respuesta for respuesta in respuestas if respuesta['index'] in casos_seleccionados_indices] # Filtrar las respuestas seleccionadas
 
     reporte_data = []
     for caso in casos_seleccionados:
