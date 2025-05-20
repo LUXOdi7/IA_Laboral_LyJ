@@ -1,9 +1,14 @@
-
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f4f4f4;
+    transition: background-color 0.3s ease;
+}
+
+body.dark-mode {
+    background-color: #121212;
+    color: #fff;
 }
 
 .container {
@@ -13,11 +18,23 @@ body {
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.container.dark-mode {
+    background-color: #1f1f1f;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+    color: #eee;
 }
 
 h1 {
     color: #333;
     text-align: center;
+    transition: color 0.3s ease;
+}
+
+h1.dark-mode {
+    color: #fff;
 }
 
 form {
@@ -28,6 +45,11 @@ label {
     display: block;
     margin-bottom: 5px;
     color: #555;
+    transition: color 0.3s ease;
+}
+
+label.dark-mode {
+    color: #ddd;
 }
 
 textarea {
@@ -37,7 +59,25 @@ textarea {
     border-radius: 4px;
     resize: vertical;
     box-sizing: border-box;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
+
+textarea.dark-mode {
+    background-color: #2a2a2a;
+    color: #eee;
+    border-color: #4d4d4d;
+}
+
+textarea:focus {
+    border-color: #4CAF50;
+    outline: none;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+}
+
+textarea.dark-mode:focus {
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+}
+
 
 button {
     padding: 10px 20px;
@@ -50,7 +90,11 @@ button {
     margin: 20px auto 0 auto;
     width: fit-content;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+button.dark-mode {
+    box-shadow: 0 2px 5px rgba(255, 255, 255, 0.2);
 }
 
 button:hover {
@@ -66,15 +110,17 @@ a {
     transition: color 0.3s ease;
 }
 
+a.dark-mode {
+    color: #64b5f6;
+}
+
 a:hover {
     text-decoration: underline;
     color: #388E3C;
 }
 
-textarea:focus {
-    border-color: #4CAF50;
-    outline: none;
-    box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+a.dark-mode:hover {
+    color: #2176ff;
 }
 
 .resultado-item {
@@ -82,32 +128,51 @@ textarea:focus {
     padding: 10px;
     margin-bottom: 15px;
     border-bottom: 1px solid #eee;
-    display: flex; /* Usamos flexbox para alinear checkbox y texto */
-    align-items: flex-start; /* Alinea los items en la parte superior */
+    display: flex;
+    align-items: flex-start;
+    transition: border-color 0.3s ease;
+}
+
+.resultado-item.dark-mode {
+    border-color: #4d4d4d;
 }
 
 .resultado-item input[type="checkbox"] {
-    margin-right: 10px; /* Espacio entre el checkbox y el texto */
-    margin-top: 4px;  /* Alinea verticalmente el checkbox con la primera línea de texto */
+    margin-right: 10px;
+    margin-top: 4px;
 }
 
 .resultado-item label {
-    display: inline-block;  /* El label se comporta como un elemento en línea */
-    margin-bottom: 0;      /* Elimina el margen inferior por defecto del label */
-    flex: 1;             /* El label ocupa el espacio restante */
+    display: inline-block;
+    margin-bottom: 0;
+    flex: 1;
+    color: #555;
+    transition: color 0.3s ease;
 }
 
+.resultado-item label.dark-mode{
+    color:#ddd;
+}
 
 .resultado-item strong {
     color: #2E7D32;
+    transition: color 0.3s ease;
+}
+
+.resultado-item strong.dark-mode {
+    color: #81c784;
 }
 
 #mensaje-error {
     margin-top: 10px;
     color: red;
+    transition: color 0.3s ease;
 }
 
-/* Estilos para el contenedor del slider */
+#mensaje-error.dark-mode {
+    color: #ff4444;
+}
+
 #resultados {
     overflow-y: auto;
     max-height: 300px;
@@ -117,9 +182,16 @@ textarea:focus {
     border-radius: 8px;
     margin-top: 20px;
     position: relative;
+    background-color: #fff;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
-/* Degradado para indicar que hay más contenido */
+#resultados.dark-mode {
+    background-color: #1f1f1f;
+    border-color: #4d4d4d;
+}
+
+
 #resultados::after {
     content: "";
     position: absolute;
@@ -131,10 +203,114 @@ textarea:focus {
     pointer-events: none;
 }
 
+#resultados.dark-mode::after {
+    background: linear-gradient(to bottom, rgba(31,31,31,0), rgba(31,31,31,1));
+}
+
+/* Nuevos estilos para la imagen debajo del título */
+.titulo-con-imagen {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+    transition: color 0.3s ease;
+}
+
+.titulo-con-imagen.dark-mode{
+    color:#fff;
+}
+
+.imagen-caso {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    margin: 0 auto 20px auto;
+    display: block;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.3s ease;
+}
+
+.imagen-caso.dark-mode {
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
+}
+
+/* Estilos del switch del modo oscuro */
+.theme-switch-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+.theme-switch-wrapper em {
+    margin-left: 10px;
+    font-size: 1em;
+    color: #555;
+    transition: color 0.3s ease;
+}
+
+.theme-switch-wrapper em.dark-mode {
+    color: #ddd;
+}
+
+.theme-switch {
+    display: inline-block;
+    height: 34px;
+    position: relative;
+    width: 60px;
+}
+
+.theme-switch input {
+    display: none;
+}
+
+.slider {
+    background-color: #ccc;
+    bottom: 0;
+    cursor: pointer;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: .4s;
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    bottom: 4px;
+    content: "";
+    height: 26px;
+    left: 4px;
+    position: absolute;
+    width: 26px;
+    transition: .4s;
+    background-color: white;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #2196F3;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
 @media (max-width: 768px) {
     .container {
         width: 95%;
         margin: 20px auto;
         padding: 10px;
+    }
+
+    .imagen-caso{
+        width: 90%;
     }
 }
