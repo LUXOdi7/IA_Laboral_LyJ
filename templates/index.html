@@ -28,7 +28,7 @@
                         <div class="resultado-item">
                             <input type="checkbox" id="caso_{{ respuesta['index'] }}" name="casos_seleccionados" value="{{ respuesta['index'] }}">
                             <label for="caso_{{ respuesta['index'] }}">
-                                <strong>Conflicto:</strong> <a href="{{ url_for('ver_caso', index=respuesta['index']) }}">{{ respuesta['caso'] }}</a><br>
+                                <strong>Conflicto:</strong> <a href="{{ url_for('ver_caso', index=respuesta['index']) }}">{{ respuesta['descripcion'] }}</a><br>
                                 <strong>Resolución:</strong> {{ respuesta['resolucion'] }}
                             </label>
                         </div>

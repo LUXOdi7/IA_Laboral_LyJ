@@ -12,8 +12,16 @@
         {% if casos_seleccionados %}
             {% for caso in casos_seleccionados %}
                 <div class="resultado-item">
-                    <p><strong>Conflicto:</strong> {{ caso['caso'] }}</p>
+                    <p><strong>Conflicto:</strong> {{ caso['descripcion'] }}</p>
                     <p><strong>Resolución:</strong> {{ caso['resolucion'] }}</p>
+                    <p><strong>Procedimiento:</strong> 
+                        {% for item in caso['procedimiento'].split('. ') %}
+                            {% if item %}
+                                <br> {{ item.strip() }}.
+                            {% endif %}
+                        {% endfor %}
+                    </p>
+                    <p><strong>Ley Aplicable:</strong> {{ caso['ley'] }}</p>
                 </div>
                 <hr>
             {% endfor %}

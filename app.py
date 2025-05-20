@@ -25,7 +25,7 @@ def preprocesar_texto(texto):
     texto = re.sub(r'[^a-záéíóú\s]', '', texto)
     # Eliminar acentos
     texto = ''.join(c for c in unicodedata.normalize('NFD', texto)
-                   if unicodedata.category(c) != 'Mn')
+                    if unicodedata.category(c) != 'Mn')
     return texto
 
 def buscar_soluciones(texto_usuario):
@@ -49,8 +49,10 @@ def buscar_soluciones(texto_usuario):
         for palabra in palabras_clave:
             if palabra in texto_usuario:
                 soluciones_encontradas.append({
-                    "caso": row['descripcion'],
+                    "descripcion": row['descripcion'],
                     "resolucion": row['resolucion'],
+                    "procedimiento": row['procedimiento'],
+                    "ley": row['ley'],
                     "index": index
                 })
                 break
@@ -91,8 +93,10 @@ def generar_reporte():
     reporte_data = []
     for caso in casos_seleccionados:
         reporte_data.append({
-            'caso': caso['caso'],
+            'descripcion': caso['descripcion'],
             'resolucion': caso['resolucion'],
+            'procedimiento': caso['procedimiento'],
+            'ley': caso['ley'],
             'index': caso['index']
         })
     reporte_url = url_for('resultado') + '?' + urlencode({'reporte_data': str(reporte_data)})
