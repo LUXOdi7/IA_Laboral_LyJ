@@ -12,6 +12,7 @@
         <form method="POST">
             <label for="descripcion">Descripción del conflicto:</label>
             <textarea id="descripcion" name="descripcion" rows="4" required>{{ texto_usuario }}</textarea><br><br>
+            <input type="hidden" name="descripcion_original" value="{{ texto_usuario }}">
             <p id="mensaje-error" {% if error %} style="color: red;" {% endif %}>
                 {{ error if error else '' }}
             </p>
@@ -19,17 +20,23 @@
         </form>
 
         {% if respuestas %}
-            <div id="resultados">
-                <h2>Resoluciones recomendadas:</h2>
-                <p>Descripción ingresada: "{{ texto_usuario }}"</p> <hr>
-                {% for respuesta in respuestas %}
-                    <div class="resultado-item">
-                        <p><strong>Conflicto:</strong> <a href="{{ url_for('ver_caso', index=respuesta['index']) }}">{{ respuesta['caso'] }}</a></p>
-                        <p><strong>Resolución:</strong> {{ respuesta['resolucion'] }}</p>
-                    </div>
-                    <hr>
-                {% endfor %}
-            </div>
+            <form method="POST" action="{{ url_for('generar_reporte') }}">
+                <div id="resultados">
+                    <h2>Resoluciones recomendadas:</h2>
+                    <p>Descripción ingresada: "{{ texto_usuario }}"</p>
+                    {% for respuesta in respuestas %}
+                        <div class="resultado-item">
+                            <input type="checkbox" id="caso_{{ respuesta['index'] }}" name="casos_seleccionados" value="{{ respuesta['index'] }}">
+                            <label for="caso_{{ respuesta['index'] }}">
+                                <strong>Conflicto:</strong> <a href="{{ url_for('ver_caso', index=respuesta['index']) }}">{{ respuesta['caso'] }}</a><br>
+                                <strong>Resolución:</strong> {{ respuesta['resolucion'] }}
+                            </label>
+                        </div>
+                    {% endfor %}
+                </div>
+                <input type="hidden" name="descripcion_original" value="{{ texto_usuario }}">
+                <button type="submit">Generar Reporte de Casos Seleccionados</button>
+            </form>
         {% endif %}
     </div>
     <script src="{{ url_for('static', filename='js/app.js') }}"></script>

@@ -1,31 +1,26 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resultado de Resolución</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>Reporte de Casos Seleccionados</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles-resultado.css') }}">
 </head>
-
 <body>
     <div class="container">
-        <h1>Resoluciones recomendadas:</h1>
-        {% if respuestas %}
-        {% for respuesta in respuestas %}
-        <p><strong>Conflicto:</strong> {{ respuesta['caso'] }}</p>
-        <p><strong>Resolución:</strong> {{ respuesta['resolucion'] }}</p>
-        <hr>
-        {% endfor %}
+        <h1>Reporte de Casos Seleccionados</h1>
+        {% if casos_seleccionados %}
+            {% for caso in casos_seleccionados %}
+                <div class="resultado-item">
+                    <p><strong>Conflicto:</strong> {{ caso['caso'] }}</p>
+                    <p><strong>Resolución:</strong> {{ caso['resolucion'] }}</p>
+                </div>
+                <hr>
+            {% endfor %}
         {% else %}
-        <p>No se encontraron conflictos coincidentes con la descripción ingresada.</p>
+            <p>No se han seleccionado casos.</p>
         {% endif %}
-        <a href="/">Volver</a>
+        <a href="{{ url_for('index') }}">Volver al Inicio</a>
     </div>
-    <div class="resultado">
-        {{ resultado }}
-    </div>
-
 </body>
-
 </html>
