@@ -11,10 +11,27 @@
         <h1>Sistema de Resolución de Conflictos Laborales</h1>
         <form method="POST">
             <label for="descripcion">Descripción del conflicto:</label>
-            <textarea id="descripcion" name="descripcion" rows="4" required></textarea><br><br>
-            <p id="mensaje-error"></p>
+            <textarea id="descripcion" name="descripcion" rows="4" required>{{ texto_usuario }}</textarea><br><br>
+            <p id="mensaje-error" {% if error %} style="color: red;" {% endif %}>
+                {{ error if error else '' }}
+            </p>
             <button type="submit">Obtener Resolución</button>
         </form>
+
+        {% if respuestas %}
+            <div id="resultados">
+                <h2>Resoluciones recomendadas:</h2>
+                <p>Descripción ingresada: "{{ texto_usuario }}"</p> <hr>
+                {% for respuesta in respuestas %}
+                    <div class="resultado-item">
+                        <p><strong>Conflicto:</strong> <a href="{{ url_for('ver_caso', index=respuesta['index']) }}">{{ respuesta['caso'] }}</a></p>
+                        <p><strong>Resolución:</strong> {{ respuesta['resolucion'] }}</p>
+                    </div>
+                    <hr>
+                {% endfor %}
+            </div>
+        {% endif %}
     </div>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
 </body>
 </html>
