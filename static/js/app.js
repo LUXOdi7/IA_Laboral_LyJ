@@ -58,6 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
             resultadosDiv.classList.toggle('dark-mode');
         }
         em.classList.toggle('dark-mode'); // Cambiar también el estilo del texto
+        localStorage.setItem('darkMode', body.classList.contains('dark-mode') ? 'enabled' : 'disabled');
     }
 
     if (checkbox) {
@@ -66,6 +67,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Comprueba si el modo oscuro está habilitado en las preferencias del usuario
     if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        if (localStorage.getItem('darkMode') !== 'disabled') {
+            toggleDarkMode();
+            if (checkbox) {
+                checkbox.checked = true;
+            }
+        }
+    } else if (localStorage.getItem('darkMode') === 'enabled') {
         toggleDarkMode();
         if (checkbox) {
             checkbox.checked = true;

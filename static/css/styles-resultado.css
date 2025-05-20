@@ -1,4 +1,3 @@
-
 .container {
     width: 80%;
     margin: 50px auto;
@@ -6,11 +5,23 @@
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.container.dark-mode {
+    background-color: #1f1f1f;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+    color: #eee;
 }
 
 h1 {
-    color: #333;
+    color: #4CAF50;
     text-align: center;
+    transition: color 0.3s ease;
+}
+
+h1.dark-mode {
+    color: white;
 }
 
 a {
@@ -21,9 +32,17 @@ a {
     transition: color 0.3s ease;
 }
 
+a.dark-mode {
+    color: #64b5f6;
+}
+
 a:hover {
     text-decoration: underline;
     color: #388E3C;
+}
+
+a.dark-mode:hover {
+    color: #2176ff;
 }
 
 .resultado-item {
@@ -31,12 +50,27 @@ a:hover {
     padding: 10px;
     margin-bottom: 15px;
     border-bottom: 1px solid #eee;
+    transition: border-color 0.3s ease;
+}
+
+.resultado-item.dark-mode {
+    border-color: #4d4d4d;
 }
 
 .resultado-item strong {
     color: #2E7D32;
     display: block;
     margin-bottom: 5px;
+    transition: color 0.3s ease;
+}
+
+.resultado-item strong.dark-mode {
+    color: #81c784;
+}
+
+body.dark-mode {
+    background-color: #121212;
+    color: #eee;
 }
 
 @media (max-width: 768px) {
