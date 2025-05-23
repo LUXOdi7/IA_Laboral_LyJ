@@ -187,10 +187,8 @@ def nuevo_caso():
         casos_df = pd.concat([casos_df, nuevo_df], ignore_index=True)
         casos_df.to_csv('casos_laborales.csv', index=False)
         
-        return render_template("index.html", 
-                             success_message="Caso registrado exitosamente!",
-                             respuestas=[],
-                             texto_usuario="")
+        return redirect(url_for('index'))
+
     
     return render_template("nuevo_caso.html")
 
