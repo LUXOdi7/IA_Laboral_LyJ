@@ -52,7 +52,7 @@ label.dark-mode {
     color: #ddd;
 }
 
-textarea {
+textarea, input[type="text"] {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
@@ -62,19 +62,19 @@ textarea {
     transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
-textarea.dark-mode {
+textarea.dark-mode, input[type="text"].dark-mode {
     background-color: #2a2a2a;
     color: #eee;
     border-color: #4d4d4d;
 }
 
-textarea:focus {
+textarea:focus, input[type="text"]:focus {
     border-color: #4CAF50;
     outline: none;
     box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
 }
 
-textarea.dark-mode:focus {
+textarea.dark-mode:focus, input[type="text"].dark-mode:focus {
     box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
 }
 
@@ -130,11 +130,12 @@ a.dark-mode:hover {
     border-bottom: 1px solid #eee;
     display: flex;
     align-items: flex-start;
-    transition: border-color 0.3s ease;
+    transition: border-color 0.3s ease, color 0.3s ease;
 }
 
 .resultado-item.dark-mode {
     border-color: #4d4d4d;
+    color: #eee;
 }
 
 .resultado-item input[type="checkbox"] {
@@ -162,6 +163,18 @@ a.dark-mode:hover {
 .resultado-item strong.dark-mode {
     color: #81c784;
 }
+
+.similitud-porcentaje {
+    font-size: 0.9em;
+    color: #666;
+    margin-left: 10px;
+    transition: color 0.3s ease;
+}
+
+.similitud-porcentaje.dark-mode {
+    color: #bbb;
+}
+
 
 #mensaje-error {
     margin-top: 10px;
@@ -192,6 +205,8 @@ a.dark-mode:hover {
 }
 
 
+/* SE ELIMINA LA SOMBRA BLANCA/NEGRA DEL FONDO */
+/*
 #resultados::after {
     content: "";
     position: absolute;
@@ -206,6 +221,7 @@ a.dark-mode:hover {
 #resultados.dark-mode::after {
     background: linear-gradient(to bottom, rgba(31,31,31,0), rgba(31,31,31,1));
 }
+*/
 
 /* Nuevos estilos para la imagen debajo del título */
 .titulo-con-imagen {
@@ -302,6 +318,72 @@ input:focus + .slider {
 input:checked + .slider:before {
     transform: translateX(26px);
 }
+
+/* Estilos para el formulario de nuevo caso */
+.new-case-form {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-top: 30px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.new-case-form.dark-mode {
+    background-color: #2a2a2a;
+    box-shadow: 0 2px 5px rgba(255, 255, 255, 0.1);
+}
+
+.new-case-form h2 {
+    color: #333;
+    margin-top: 0;
+    transition: color 0.3s ease;
+}
+
+.new-case-form h2.dark-mode {
+    color: #fff;
+}
+
+.new-case-form label {
+    color: #555;
+    transition: color 0.3s ease;
+}
+
+.new-case-form label.dark-mode {
+    color: #ddd;
+}
+
+.new-case-form textarea,
+.new-case-form input[type="text"] {
+    background-color: #fff;
+    color: #333;
+    border-color: #ccc;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.new-case-form textarea.dark-mode,
+.new-case-form input[type="text"].dark-mode {
+    background-color: #1f1f1f;
+    color: #eee;
+    border-color: #4d4d4d;
+}
+
+.success-message {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 15px;
+    border-radius: 5px;
+    margin-top: 20px;
+    text-align: center;
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.success-message.dark-mode {
+    background-color: #28a745;
+    color: #fff;
+}
+
 
 @media (max-width: 768px) {
     .container {
