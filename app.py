@@ -12,8 +12,6 @@ app = Flask(__name__)
 # Cargar los casos y sus palabras clave desde el CSV
 casos_df = pd.read_csv('casos_laborales.csv')
 
-
-
 def preprocesar_texto(texto):
     """
     Preprocesa el texto de entrada para mejorar la coincidencia de palabras clave.
@@ -83,6 +81,7 @@ def buscar_soluciones(texto_usuario):
     soluciones_encontradas.sort(key=lambda x: x['similitud_porcentaje'], reverse=True)
     
     return soluciones_encontradas
+
 @app.route("/", methods=["GET", "POST"])
 def index():
     """
@@ -155,6 +154,45 @@ def ver_caso(index):
         return render_template("caso_detalle.html", caso=caso.to_dict(), index=index)
     else:
         return "Caso no encontrado", 404
+
+# ==============================================
+# NUEVA FUNCIONALIDAD PARA REGISTRAR CASOS
+# ==============================================
+
+@app.route("/nuevo_caso", methods=["GET", "POST"])
+def nuevo_caso():
+    """
+    Maneja el formulario para registrar un nuevo caso laboral.
+    """
+    if request.method == "POST":
+        # Obtener datos del formulario
+        descripcion = request.form["descripcion"]
+        resolucion = request.form["resolucion"]
+        procedimiento = request.form["procedimiento"]
+        ley = request.form["ley"]
+        palabras_clave = request.form["palabras_clave"]
+        
+        # Crear nuevo registro
+        nuevo_caso = {
+            "descripcion": descripcion,
+            "resolucion": resolucion,
+            "procedimiento": procedimiento,
+            "ley": ley,
+            "palabras_clave": palabras_clave
+        }
+        
+        # Convertir a DataFrame y guardar
+        global casos_df
+        nuevo_df = pd.DataFrame([nuevo_caso])
+        casos_df = pd.concat([casos_df, nuevo_df], ignore_index=True)
+        casos_df.to_csv('casos_laborales.csv', index=False)
+        
+        return render_template("index.html", 
+                             success_message="Caso registrado exitosamente!",
+                             respuestas=[],
+                             texto_usuario="")
+    
+    return render_template("nuevo_caso.html")
 
 @app.errorhandler(500)
 def internal_server_error(e):

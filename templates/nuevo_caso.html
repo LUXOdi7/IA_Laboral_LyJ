@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Nuevo Caso</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Registrar Nuevo Caso Laboral</h1>
+        <form method="POST" action="{{ url_for('nuevo_caso') }}">
+            <div class="new-case-form">
+                <label for="descripcion">Descripción del conflicto:</label>
+                <textarea id="descripcion" name="descripcion" rows="4" required></textarea>
+
+                <label for="resolucion">Resolución:</label>
+                <input type="text" id="resolucion" name="resolucion" required>
+
+                <label for="procedimiento">Procedimiento (separar por puntos):</label>
+                <textarea id="procedimiento" name="procedimiento" rows="4" required></textarea>
+
+                <label for="ley">Ley aplicable:</label>
+                <input type="text" id="ley" name="ley" required>
+
+                <label for="palabras_clave">Palabras clave (separar por comas):</label>
+                <input type="text" id="palabras_clave" name="palabras_clave" required>
+
+                <button type="submit">Guardar Caso</button>
+                <a href="{{ url_for('index') }}">Cancelar</a>
+            </div>
+        </form>
+    </div>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

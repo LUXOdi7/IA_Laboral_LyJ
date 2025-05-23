@@ -8,6 +8,10 @@
 </head>
 <body>
     <div class="container">
+        {% if success_message %}
+            <div class="success-message">{{ success_message }}</div>
+        {% endif %}
+        
         <div class="theme-switch-wrapper">
             <label class="theme-switch" for="checkbox">
                 <input type="checkbox" id="checkbox">
@@ -46,6 +50,10 @@
                 <button type="submit">Generar Reporte de Casos Seleccionados</button>
             </form>
         {% endif %}
+
+        <div style="text-align: center; margin-top: 30px;">
+            <a href="{{ url_for('nuevo_caso') }}" class="btn-new-case">Registrar Nuevo Caso</a>
+        </div>
     </div>
     <script src="{{ url_for('static', filename='js/app.js') }}"></script>
 </body>

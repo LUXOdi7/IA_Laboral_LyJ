@@ -396,3 +396,42 @@ input:checked + .slider:before {
         width: 90%;
     }
 }
+
+/* Estilos para el botón de nuevo caso */
+.btn-new-case {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #2196F3;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.btn-new-case:hover {
+    background-color: #0b7dda;
+    text-decoration: none;
+}
+
+.btn-new-case.dark-mode {
+    box-shadow: 0 2px 5px rgba(255, 255, 255, 0.2);
+}
+
+/* Estilos para mensaje de éxito */
+.success-message {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 15px;
+    border-radius: 5px;
+    margin-top: 20px;
+    text-align: center;
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.success-message.dark-mode {
+    background-color: #28a745;
+    color: #fff;
+}
